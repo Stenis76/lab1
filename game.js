@@ -30,11 +30,16 @@ function showTextNode(textNodeIndex) {
 }
 
 function showOption(option) {
-    return true
+    return option.requiredState == null || option.requiredState(state)
 }
 //En funktion som körs varje gång vi ska gör ett val
 function selectOption(option) {
-
+    const nextTextNodeId = option.nextText
+    if (nextTextNodeId <= 0) {
+        return startGame()
+    }
+    state = Object.assign(state, option.setState)
+    showTextNode(nextTextNodeId)
 }
 
 // Texten som skall visas
@@ -45,7 +50,7 @@ const textNodes = [
         options: [
             {
                 text: 'Take the pills',
-                setState: { pills: true},
+                setState: { pills: true },
                 nextText: 2,
             },
             {
@@ -56,22 +61,47 @@ const textNodes = [
     },
     {
         id: 2,
-        text: ' You silently try to get out of bed without waking the beast sleeping next to you. You go out to the kitchen to get yourself a glass of water',
+        text: 'You silently try to get out of bed without waking the beast sleeping next to you. You go out to the kitchen to get yourself a glass of water',
         options: [
             {
                 text: 'Drink water and use painkiller',
                 requiredState: (currentState) => currentState.pills,
-                setState: {pills = false, noHeadache = true, noThirst = true} ,
-                nextText: 3
-            }
+                setState: { pills: false, noHeadache: true, noThirst: true} ,
+                nextText: 3,
+            },
             {
                 text: 'Drink water',
-                setState: {noThirst = true},
-                nextText: 3
-            }
+                setState: {noThirst: true},
+                nextText: 3,
+            },
             {
-                text: 'go back to bed',
-                nextText: 4
+                text: 'Go back to bed',
+                nextText: 4,
+            }
+        ]
+    },
+    {
+        id: 3,
+        text: 'The world around you have started to stablize a bit, suddenly one of your kids starts to cry from the bedroom. What do you do?',
+        options: [
+            {
+                text: 'hurry in to make it stop',
+                nextText: 5,
+            },
+            {
+                text: 'hide in bathroom',
+                nextText: 6,
+            }
+        ]
+
+    },
+    {
+        id: 4,
+        text: 'On youre way back to bed u feel so dizzy from the dehydration and your head feels that its going to explode, u trip and fall waking youre spouse - Youre dead',
+        options: [
+            {
+                text: 'Restart',
+                nextText: -1,
             }
         ]
     }
