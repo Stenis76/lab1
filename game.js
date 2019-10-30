@@ -104,7 +104,23 @@ const textNodes = [
                 nextText: -1,
             }
         ]
-    }
+    },
+    {
+    id: 5,
+    text: 'The world around you have started to stablize a bit, suddenly one of your kids starts to cry from the bedroom. What do you do?',
+    options: [
+        {
+            text: 'With no headache, u easily comfort the baby',
+            requiredState: (currentState) => currentState.noHeadache,
+            nextText: 7,
+        },
+        {
+            text: 'U try to make the baby quite',
+            nextText: 8,
+        }
+    ]
+
+},
 ]
 
 //körs när sidan laddats
