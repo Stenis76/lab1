@@ -1,5 +1,5 @@
 const textElement = document.getElementById('text')
-const optionButtonsElement = document.getElementById('option-buttons')
+const optionListItems = document.getElementById('optionlist')
 
 //håller koll på vad karaktären har gjort och har med sig
 let state = {}
@@ -11,29 +11,29 @@ function startGame() {
 }
 // Visar vilket val vi är på
 function showTextNode(textNodeIndex) {
-  const textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
-  textElement.innerText = textNode.text
-  // loop för att ta bort knapparna
-  while (optionButtonsElement.firstChild) {
-    optionButtonsElement.removeChild(optionButtonsElement.firstChild)
-  }
-// sätta tillbaka knapparna utifrån våra val
-  textNode.options.forEach(option => {
-      if (showOption(option)) {
-          const button = document.createElement('button')
-          button.innerText = option.text
-          button.classList.add('btn')
-          button.addEventListener('click', () => selectOption(option))
-          optionButtonsElement.appendChild(button)
-      }
-  })
+    debugger
+    const textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
+    textElement.innerText = textNode.text
+
+    // loop för att ta bort knapparna
+    while (optionListItems.firstChild) {
+        optionListItems.removeChild(optionListItems.firstChild)
+    }
+    // sätta ut alterntiv för våra val i form av en lista
+    
+    // textNode.options.forEach(option => {
+    //     if (showOption(option)) {
+    //         const list = document.createElement('<li>')
+    //         list.innerText = option.text
+    //         list.classList.add('<li>')
+    //         list.addEventListener('click', () => selectOption(option))
+    //         optionButtonsElement.appendChild(button)
+    //     }
+    // })
 }
 
-function showOption(option) {
-    return option.requiredState == null || option.requiredState(state)
-}
 //En funktion som körs varje gång vi ska gör ett val
-function selectOption(option) {
+function selectOption() {
     const nextTextNodeId = option.nextText
     if (nextTextNodeId <= 0) {
         return startGame()
@@ -42,6 +42,10 @@ function selectOption(option) {
     showTextNode(nextTextNodeId)
 }
 
+function inputValue() {
+    let inputValue = document.getElementById('user-input').value
+     return selectOption(inputValue)
+}
 // Texten som skall visas
 const textNodes = [
     {
@@ -66,12 +70,12 @@ const textNodes = [
             {
                 text: 'Drink water and use painkiller',
                 requiredState: (currentState) => currentState.pills,
-                setState: { pills: false, noHeadache: true, noThirst: true} ,
+                setState: { pills: false, noHeadache: true, noThirst: true },
                 nextText: 3,
             },
             {
                 text: 'Drink water',
-                setState: {noThirst: true},
+                setState: { noThirst: true },
                 nextText: 3,
             },
             {
@@ -106,21 +110,21 @@ const textNodes = [
         ]
     },
     {
-    id: 5,
-    text: 'The world around you have started to stablize a bit, suddenly one of your kids starts to cry from the bedroom. What do you do?',
-    options: [
-        {
-            text: 'With no headache, u easily comfort the baby',
-            requiredState: (currentState) => currentState.noHeadache,
-            nextText: 7,
-        },
-        {
-            text: 'U try to make the baby quite',
-            nextText: 8,
-        }
-    ]
+        id: 5,
+        text: 'The world around you have started to stablize a bit, suddenly one of your kids starts to cry from the bedroom. What do you do?',
+        options: [
+            {
+                text: 'With no headache, u easily comfort the baby',
+                requiredState: (currentState) => currentState.noHeadache,
+                nextText: 7,
+            },
+            {
+                text: 'U try to make the baby quite',
+                nextText: 8,
+            }
+        ]
 
-},
+    },
 ]
 
 //körs när sidan laddats
