@@ -3,14 +3,20 @@ const optionListItems = document.getElementById('optionlist')
 
 //håller koll på vad karaktären har gjort och har med sig
 let state = {}
-
 let textNode;
-// startar spelet, sätter igång applicationen där den ska börja
+
+
+/**
+ * startar spelet, sätter igång applicationen där den ska börja
+ */
 function startGame() {
     state = {}
     showTextNode(1)
 }
-// Visar vilket val vi är på
+/**
+ * Visar vilket val/nod vi är på i spelet
+ * @param {Number} textNodeIndex 
+ */
 function showTextNode(textNodeIndex) {
 
     textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
@@ -21,28 +27,30 @@ function showTextNode(textNodeIndex) {
         optionListItems.removeChild(optionListItems.firstChild)
     }
     // sätta ut alterntiv för våra val i form av en lista
-    
+
     textNode.options.forEach(option => {
         // if (showOption(option)) {
-            const listItem = document.createElement('li')
-            listItem.innerText = option.text
-            optionListItems.appendChild(listItem)
-            // list.addEventListener('click', () => selectOption(option))
-            // optionButtonsElement.appendChild(button)
+        const listItem = document.createElement('li')
+        listItem.innerText = option.text
+        optionListItems.appendChild(listItem)
+        // list.addEventListener('click', () => selectOption(option))
+        // optionButtonsElement.appendChild(button)
         // }
     })
 }
 
 //En funktion som körs varje gång vi ska gör ett val
 function selectOption(input) {
-const option = textNode.options.find(option => option.text.toLowerCase() === input.toLowerCase())
+    const option = textNode.options.find(option => option.text.toLowerCase() === input.toLowerCase())
 
-if (!option) return//skriv ut felmedelande på sidan
-
+/**
+ * @todo skriv ut felmedelande på sidan
+ */
+    if (!option) return
 
     const nextTextNodeId = option.nextText
     if (nextTextNodeId <= 0) return startGame()
-    
+
     // state = Object.assign(state, option.setState)
     showTextNode(nextTextNodeId)
 }
@@ -52,7 +60,7 @@ function inputValue() {
     const inputElement = document.getElementById('user-input')
     let inputValue = inputElement.value
 
-    // OM input value = 0 (dvs tom) så retunerar vi det upp i de blå (avbryter funktion)
+    // Om input value = 0 (dvs tom) så retunerar vi det upp i de blå (avbryter funktion) !=negation
     if (!inputValue.length) return
 
     inputElement.value = ''
@@ -65,7 +73,7 @@ const textNodes = [
         text: 'After a real good night out with the lads you wake up in your bed next to your sleeping wife. Your head is killing you, and yore mouth is dry as a desert. There´s some asperin in the bedside drawer',
         options: [
             {
-                text: 'Take the pills',
+                text: 'Take pills',
                 setState: { pills: true },
                 nextText: 2,
             },
@@ -80,7 +88,7 @@ const textNodes = [
         text: 'You silently try to get out of bed without waking the beast sleeping next to you. You go out to the kitchen to get yourself a glass of water',
         options: [
             {
-                text: 'Drink water and use painkiller',
+                text: 'Drink water and use pills',
                 requiredState: (currentState) => currentState.pills,
                 setState: { pills: false, noHeadache: true, noThirst: true },
                 nextText: 3,
@@ -91,7 +99,7 @@ const textNodes = [
                 nextText: 3,
             },
             {
-                text: 'Go back to bed',
+                text: 'Go to bed',
                 nextText: 4,
             }
         ]
@@ -101,7 +109,7 @@ const textNodes = [
         text: 'The world around you have started to stablize a bit, suddenly one of your kids starts to cry from the bedroom. What do you do?',
         options: [
             {
-                text: 'hurry in to make it stop',
+                text: 'hurry in',
                 nextText: 5,
             },
             {
@@ -139,5 +147,7 @@ const textNodes = [
     },
 ]
 
-//körs när sidan laddats
+/**
+ * Körs när hela sidan laddats
+ */
 startGame()
