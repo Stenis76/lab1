@@ -4,6 +4,7 @@ const optionListItems = document.getElementById('optionlist')
 //håller koll på vad karaktären har gjort och har med sig
 let state = {}
 
+let textNode;
 // startar spelet, sätter igång applicationen där den ska börja
 function startGame() {
     state = {}
@@ -11,8 +12,8 @@ function startGame() {
 }
 // Visar vilket val vi är på
 function showTextNode(textNodeIndex) {
-    debugger
-    const textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
+
+    textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
     textElement.innerText = textNode.text
 
     // loop för att ta bort knapparna
@@ -21,30 +22,41 @@ function showTextNode(textNodeIndex) {
     }
     // sätta ut alterntiv för våra val i form av en lista
     
-    // textNode.options.forEach(option => {
-    //     if (showOption(option)) {
-    //         const list = document.createElement('<li>')
-    //         list.innerText = option.text
-    //         list.classList.add('<li>')
-    //         list.addEventListener('click', () => selectOption(option))
-    //         optionButtonsElement.appendChild(button)
-    //     }
-    // })
+    textNode.options.forEach(option => {
+        // if (showOption(option)) {
+            const listItem = document.createElement('li')
+            listItem.innerText = option.text
+            optionListItems.appendChild(listItem)
+            // list.addEventListener('click', () => selectOption(option))
+            // optionButtonsElement.appendChild(button)
+        // }
+    })
 }
 
 //En funktion som körs varje gång vi ska gör ett val
-function selectOption() {
+function selectOption(input) {
+const option = textNode.options.find(option => option.text.toLowerCase() === input.toLowerCase())
+
+if (!option) return//skriv ut felmedelande på sidan
+
+
     const nextTextNodeId = option.nextText
-    if (nextTextNodeId <= 0) {
-        return startGame()
-    }
-    state = Object.assign(state, option.setState)
+    if (nextTextNodeId <= 0) return startGame()
+    
+    // state = Object.assign(state, option.setState)
     showTextNode(nextTextNodeId)
 }
 
 function inputValue() {
-    let inputValue = document.getElementById('user-input').value
-     return selectOption(inputValue)
+    console.log("hej");
+    const inputElement = document.getElementById('user-input')
+    let inputValue = inputElement.value
+
+    // OM input value = 0 (dvs tom) så retunerar vi det upp i de blå (avbryter funktion)
+    if (!inputValue.length) return
+
+    inputElement.value = ''
+    selectOption(inputValue)
 }
 // Texten som skall visas
 const textNodes = [
