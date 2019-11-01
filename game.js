@@ -2,9 +2,8 @@ const textElement = document.getElementById('text')
 const optionListItems = document.getElementById('optionlist')
 
 let textNode;
-
-//håller koll på vad karaktären har gjort och har med sig, då jag ännu inte använder mig av 
-//states än så fyller den ingen funktion
+/** håller koll på vad karaktären har gjort och har med sig, då jag ännu inte använder mig av 
+states än så fyller den ingen funktion*/
 let state = {}
 
 
@@ -17,10 +16,9 @@ function startGame() {
 }
 /**
  * Visar vilket val/nod vi är på i spelet
- * @param {Number} textNodeIndex 
+ * @param {Number} textNodeIndex nuvarnde textnode
  */
 function showTextNode(textNodeIndex) {
-
     textNode = textNodes.find(textNode => textNode.id === textNodeIndex)
     textElement.innerText = textNode.text
 
@@ -28,11 +26,9 @@ function showTextNode(textNodeIndex) {
     while (optionListItems.firstChild) {
         optionListItems.removeChild(optionListItems.firstChild)
     }
+
     
-/**
- * Sätta ut alterntiv för våra val i form av en lista
- * 
- */
+    //Sätta ut alterntiv för våra val i form av en lista
     textNode.options.forEach(option => {
         const listItem = document.createElement('li')
         listItem.innerText = option.text
@@ -48,14 +44,14 @@ function showTextNode(textNodeIndex) {
 
 /**
  * En funktion som körs varje gång vi ska gör ett val (frågan e om)
- * @param {string} input 
+ * @param {string} input beskrivning
  */
 function selectOption(input) {
     const option = textNode.options.find(option => option.text.toLowerCase() === input.toLowerCase())
 
-/**
- * @todo skriv ut felmedelande på sidan
- */
+    /**
+     * @todo skriv ut felmedelande på sidan
+     */
     if (!option) return
 
     const nextTextNodeId = option.nextText
@@ -77,15 +73,29 @@ function inputValue() {
     inputElement.value = ''
     selectOption(inputValue)
 }
-// Texten som skall visas
+
+/**
+ * Valmöjlighter i varje GameNode
+ * @typedef {{text:string, nextText:number} GameNodeOption
+ */
+
+/**
+ * En nod som beskriver spelets olika steg samt valmöjlighter
+ * @typedef {{id:number, text:string, option: Array<GameNodeOption>}} GameNode
+ */
+
+/**
+ * Texten som skall visas samt val för spelet
+ * @type {Array<GameNode>} 
+ */
 const textNodes = [
     {
         id: 1,
-        text: 'After a real good night out with the lads you wake up in your bed next to your sleeping wife. Your head is killing you, and yore mouth is dry as a desert. There´s some pills in the bedside drawer',
+        text: `After a real good night out with the lads you wake up in your bed next to your sleeping wife. Your head is killing you, and yore mouth is dry as a desert. There´s some pills in the bedside drawer`,
         options: [
             {
                 text: 'Take pills',
-               // setState: { pills: true },
+                // setState: { pills: true },
                 nextText: 6,
             },
             {
@@ -167,7 +177,8 @@ const textNodes = [
     },
     {
         id: 6,
-        text: 'You swallow the pills without checking the label, why on earth would someone store cyanidpills in there bedside drawer.. Youre dead!',
+        text: 'You swallow the pills without checking the label'
+            + 'why on earth would someone store cyanidpills in there bedside drawer.. Youre dead!',
         options: [
             {
                 text: 'Restart',
@@ -197,7 +208,7 @@ const textNodes = [
     },
     {
         id: 9,
-        text:'You sing a lullaby and the baby falls asleep, what do u do now? You still got one hell of a headache and you should probably get some more water in your system',
+        text: 'You sing a lullaby and the baby falls asleep, what do u do now? You still got one hell of a headache and you should probably get some more water in your system',
         options: [
             {
                 text: 'Make breakfast',
@@ -227,7 +238,7 @@ const textNodes = [
     },
     {
         id: 11,
-        text:'You make a real good breakfast, with egg and bacon, black coffe and some orange juice.',
+        text: 'You make a real good breakfast, with egg and bacon, black coffe and some orange juice.',
         options: [
             {
                 text: 'Give it wife in bed',
@@ -241,7 +252,7 @@ const textNodes = [
     },
     {
         id: 12,
-        text:'You know what they say - happy wife, happy life! Congrats you survived',
+        text: 'You know what they say - happy wife, happy life! Congrats you survived',
         options: [
             {
                 text: 'Restart',
@@ -251,7 +262,7 @@ const textNodes = [
     },
     {
         id: 13,
-        text:'You eat the breakfast and you feel that youre life is comming back to u.. But then it happens youre wife wakes up hungry and theres no food left.. Youre dead!',
+        text: 'You eat the breakfast and you feel that youre life is comming back to u.. But then it happens youre wife wakes up hungry and theres no food left.. Youre dead!',
         options: [
             {
                 text: 'Restart',
