@@ -64,9 +64,10 @@ function selectOption(input) {
     // state = Object.assign(state, option.setState)
     showTextNode(nextTextNodeId)
 }
-
+/**
+ * 
+ */
 function inputValue() {
-    console.log("hej");
     const inputElement = document.getElementById('user-input')
     let inputValue = inputElement.value
 

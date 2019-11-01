@@ -1,6 +1,6 @@
 # lab1
 
-
+//
 Laboration 1
 
 - en textbaserad interaktiv upplevelse
@@ -34,6 +34,10 @@ Alla funktioner och objekt är dokumenterade med korrekt JS-doc
 Det ska finnas flera olika vägval att göra för användaren i din värld 
 
 
-Credits:
-Stommen för hur koden skall bete sig är tagen från en youtube - tutorial. Min plan är att använda detta för att anpassa den så att den funkar med min uppgift.
+//
+Avgränsningar, Credits mm:
+
+Spelmekanismen för hur koden skall bete sig är tagen från en youtube - tutorial. Min plan är att använda detta för att anpassa den så att den funkar med min uppgift.
 länk till https://www.youtube.com/watch?v=R1S_NhKkvGA
+
+Tillvägagångsättet har varit att följa hans Youtube-tutorial till punkt och pricka för att förstå varför saker händer. Därefter har jag anpassat koden utefter min uppgift och spelide. Jag har även valt att ta bort den delen som hanterar states av den enkla anledningen att jag inte förstod koden fullt ut. Dock har jag kvar den i kommentarer för att jag framöver ska kunna använda mig av den.
