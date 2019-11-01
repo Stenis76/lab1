@@ -2,8 +2,8 @@ const textElement = document.getElementById('text')
 const optionListItems = document.getElementById('optionlist')
 
 let textNode;
-/** håller koll på vad karaktären har gjort och har med sig, då jag ännu inte använder mig av 
-states än så fyller den ingen funktion*/
+// håller koll på vad karaktären har gjort och har med sig, då jag ännu inte använder mig av 
+// states än så fyller den ingen funktion
 let state = {}
 
 
@@ -43,11 +43,11 @@ function showTextNode(textNodeIndex) {
 
 
 /**
- * En funktion som körs varje gång vi ska gör ett val (frågan e om)
- * @param {string} input beskrivning
+ * En funktion som körs varje gång vi ska gör ett val och placerar oss rätt i spelet. samt hanterar ev stora å små bokstäver
+ * @param {string} inputValue Omvandlar svaret och diregerar oss till nästa textnode
  */
-function selectOption(input) {
-    const option = textNode.options.find(option => option.text.toLowerCase() === input.toLowerCase())
+function selectOption(inputValue) {
+    const option = textNode.options.find(option => option.text.toLowerCase() === inputValue.toLowerCase())
 
     /**
      * @todo skriv ut felmedelande på sidan
@@ -61,7 +61,8 @@ function selectOption(input) {
     showTextNode(nextTextNodeId)
 }
 /**
- * 
+ * Hämtar input från textfältet
+ * @param {string} 
  */
 function inputValue() {
     const inputElement = document.getElementById('user-input')
