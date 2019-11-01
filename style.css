@@ -3,6 +3,12 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 body {
+    background-color: bisque;
+}
+header {
+    align-items: center;
+}
+main {
     padding: 0;
     margin: 0;
     display: flex;
@@ -20,21 +26,15 @@ body {
     border-radius: 4px;
     box-shadow: 0 0 10px 2px;
 }
-.btn-grid{
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: 0.5rem;
-    margin-top: 1rem;
-
-}
-.btn {
+#myBtn {
     background-color: rgba(232, 155, 232, 0.9);
     border: 1px solid rgba(189, 156, 189, 0.3);
     border-radius: 5px;
+    margin-top: 5px;
     padding: 5px 10px;
     color: black;
     outline: none;
 }
-.btn:hover {
+#myBtn:hover {
     border-color: black;
 }
