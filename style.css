@@ -26,7 +26,7 @@ main {
     border-radius: 4px;
     box-shadow: 0 0 10px 2px;
 }
-#myBtn {
+/* #myBtn {
     background-color: rgba(232, 155, 232, 0.9);
     border: 1px solid rgba(189, 156, 189, 0.3);
     border-radius: 5px;
@@ -37,4 +37,4 @@ main {
 }
 #myBtn:hover {
     border-color: black;
-}
+} */
