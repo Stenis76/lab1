@@ -43,4 +43,5 @@ länk till https://www.youtube.com/watch?v=R1S_NhKkvGA
 Tillvägagångsättet har varit att följa hans Youtube-tutorial till punkt och pricka för att förstå varför saker händer. Därefter har jag anpassat koden utefter min uppgift och spelide. Jag har även valt att ta bort den delen som hanterar states av den enkla anledningen att jag inte förstod koden fullt ut. Dock har jag kvar den i kommentarer för att jag framöver ska kunna använda mig av den i framtiden.
 //
 
+Github-repo: https://github.com/Stenis76/lab1
 demo: https://stenis76.github.io/lab1/
